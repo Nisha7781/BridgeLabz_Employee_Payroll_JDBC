@@ -128,4 +128,26 @@ public class DBdemo
         return employeelist;
     }
 
+    public double AggregateOperations(String url, String username, String password) throws Exception {
+
+        try {
+            Connection connection=DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            String query="select sum(BasicPay) from employee_payroll where Gender = 'F'";
+            ResultSet resultSet = statement.executeQuery(query);
+            double sum = 0;
+
+            while(resultSet.next())
+            {
+                sum=resultSet.getDouble(1);
+            }
+            connection.close();
+            statement.close();
+
+            return sum;
+        } catch (SQLException e) {
+            throw new Exception("No result found");
+        }
+
+    }
 }

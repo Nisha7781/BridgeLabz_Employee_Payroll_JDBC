@@ -45,7 +45,6 @@ class DBdemoTest
     public void updateSalary() throws Exception
     {
         double salary = d.updateSalary(url,username,password);
-        System.out.println(salary);
         Assertions.assertEquals(1, salary);
     }
 
@@ -60,5 +59,12 @@ class DBdemoTest
         Assertions.assertEquals(25000.0, employeePayroll.getBasicPay());
         Assertions.assertEquals(Date.valueOf("2024-03-01"), employeePayroll.getStart_date());
         Assertions.assertEquals('F', employeePayroll.getGender());
+    }
+
+    @Test
+    public void testAggregateOperations() throws Exception
+    {
+        double result = d.AggregateOperations(url, username, password);
+        Assertions.assertEquals(135000.0, result,0.0);
     }
 }
