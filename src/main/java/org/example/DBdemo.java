@@ -80,19 +80,23 @@ public class DBdemo
         return employeelist;
     }
 
-    public double updateSalary(String url, String username, String password) throws Exception
-    {
-        try {
-            Connection connection=DriverManager.getConnection(url, username, password);
-            Statement stmt = connection.createStatement();
-            String query="update employee_payroll set BasicPay = 35000 where Emp_ID = 2";
+    public double updateSalary(String url, String username, String password) throws Exception {
+        String query = "update employee_payroll set BasicPay = ? where Emp_ID = ?";
+        int update = 0;
 
-            int update = stmt.executeUpdate(query);
-            return update;
+        try (Connection connection = DriverManager.getConnection(url, username, password);
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setDouble(1, 50000);
+            ps.setInt(2, 4);
+            update = ps.executeUpdate();
 
         } catch (SQLException e) {
             throw new Exception("Failed to update Basicpay...");
         }
+
+        return update;
     }
+
 
 }

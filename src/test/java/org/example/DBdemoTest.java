@@ -45,6 +45,7 @@ class DBdemoTest
     public void updateSalary() throws Exception
     {
         double salary = d.updateSalary(url,username,password);
+        System.out.println(salary);
         Assertions.assertEquals(1, salary);
     }
 }
