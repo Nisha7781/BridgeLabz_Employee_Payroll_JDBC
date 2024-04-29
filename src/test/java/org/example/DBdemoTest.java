@@ -40,4 +40,11 @@ class DBdemoTest
         Assertions.assertEquals(Date.valueOf("2024-01-01"), employeePayroll.getStart_date());
         Assertions.assertEquals('F', employeePayroll.getGender());
     }
+
+    @Test
+    public void updateSalary() throws Exception
+    {
+        double salary = d.updateSalary(url,username,password);
+        Assertions.assertEquals(1, salary);
+    }
 }

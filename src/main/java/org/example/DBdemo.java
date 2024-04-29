@@ -80,6 +80,19 @@ public class DBdemo
         return employeelist;
     }
 
-    
+    public double updateSalary(String url, String username, String password) throws Exception
+    {
+        try {
+            Connection connection=DriverManager.getConnection(url, username, password);
+            Statement stmt = connection.createStatement();
+            String query="update employee_payroll set BasicPay = 35000 where Emp_ID = 2";
+
+            int update = stmt.executeUpdate(query);
+            return update;
+
+        } catch (SQLException e) {
+            throw new Exception("Failed to update Basicpay...");
+        }
+    }
 
 }
