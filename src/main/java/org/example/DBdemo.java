@@ -98,5 +98,34 @@ public class DBdemo
         return update;
     }
 
+    public List<EmployeePayroll> getemployees_JoinedWithinDate(String url) throws Exception {
+        List<EmployeePayroll> employeelist = new ArrayList<>();
+
+        String username = "root";
+        String password = "Mahi7781";
+
+        try {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            String query = "select * from employee_payroll where Start_date between '2024-02-01' and '2024-04-05'";
+            ResultSet rs = statement.executeQuery(query);
+
+            while (rs.next()) {
+                int Emp_ID = rs.getInt(1);
+                String Emp_Name = rs.getString(2);
+                double BasicPay = rs.getDouble(7);
+                Date Start_date = rs.getDate(8);
+                char Gender = rs.getString(3).charAt(0);
+
+                EmployeePayroll employeePayroll = new EmployeePayroll(Emp_ID, Emp_Name, BasicPay, Start_date, Gender);
+                employeelist.add(employeePayroll);
+                
+            }
+        } catch (SQLException e) {
+            throw new Exception("No data found");
+        }
+
+        return employeelist;
+    }
 
 }

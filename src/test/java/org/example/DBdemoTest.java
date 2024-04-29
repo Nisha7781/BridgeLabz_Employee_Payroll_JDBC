@@ -48,4 +48,17 @@ class DBdemoTest
         System.out.println(salary);
         Assertions.assertEquals(1, salary);
     }
+
+    @Test
+    public void getemployees_JoinedWithinDate() throws Exception {
+        List<EmployeePayroll> employeePayrollList = d.getemployees_JoinedWithinDate(url);
+
+        Assertions.assertFalse(employeePayrollList.isEmpty());
+
+        EmployeePayroll employeePayroll = employeePayrollList.get(0);
+        Assertions.assertEquals("Sanika", employeePayroll.getEmp_Name());
+        Assertions.assertEquals(25000.0, employeePayroll.getBasicPay());
+        Assertions.assertEquals(Date.valueOf("2024-03-01"), employeePayroll.getStart_date());
+        Assertions.assertEquals('F', employeePayroll.getGender());
+    }
 }
